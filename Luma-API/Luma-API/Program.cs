@@ -1,5 +1,8 @@
 using Luma_API.Configuration;
+using Luma_API.Domain.Entities;
+using Luma_API.Infrastructure;
 using Luma_API.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<LumaDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("LumaDb"),
+    npg => npg.MapEnum<Breakpoint>()
+    )
+);
 
 builder.Services.Configure<GoogleApiSettings>(
     builder.Configuration.GetSection("GoogleApis"));
