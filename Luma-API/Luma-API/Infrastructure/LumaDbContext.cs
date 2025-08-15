@@ -69,6 +69,10 @@ public class LumaDbContext : DbContext
             .HasOne(c => c.WidgetInstance).WithOne(i => i.Config)
             .HasForeignKey<WidgetConfig>(c => c.WidgetInstanceId);
 
+        b.Entity<User>()
+            .Property(x => x.LastLoggedInAt)
+            .HasColumnType("timestamp with time zone");
+
         // Optional: map JSONB
         // b.Entity<WidgetConfig>().Property(c => c.Config).HasColumnType("jsonb");
     }

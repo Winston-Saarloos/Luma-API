@@ -17,6 +17,7 @@ builder.Services.AddDbContext<LumaDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("LumaDb"),
     npg => npg.MapEnum<Breakpoint>()
     )
+    .UseSnakeCaseNamingConvention()
 );
 
 builder.Services.Configure<GoogleApiSettings>(

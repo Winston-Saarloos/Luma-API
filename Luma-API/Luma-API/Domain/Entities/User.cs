@@ -6,6 +6,7 @@ public class User
     public string Email { get; set; } = null!;            // unique
     public string DisplayName { get; set; } = null!;
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+    public DateTime? LastLoggedInAt { get; set; }
 
     // nav
     public ICollection<Dashboard> Dashboards { get; set; } = new List<Dashboard>();
